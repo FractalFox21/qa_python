@@ -5,9 +5,6 @@ from main import BooksCollector
 # обязательно указывать префикс Test
 class TestBooksCollector:
 
-    '''@pytest.fixrure
-    def collector(self):
-        return BooksCollector()'''
     # пример теста:
     # обязательно указывать префикс test_
     # дальше идет название метода, который тестируем add_new_book_
@@ -26,14 +23,28 @@ class TestBooksCollector:
 
         assert len(collector.books_genre) == 2
 
-    def test_add_new_book_invalid_lenhth_empty_dict(self):
+        # чтобы тесты были независимыми в каждом из них создавай отдельный экземпляр класса BooksCollector()
+    def test_add_new_book_invalid_lenhth_empty_dict(self):      # 1 Проверка на добавление книги с длинным названием
         collector = BooksCollector()
         collector.add_new_book('Что делать, если ваш кот хочет вас убить Что делать, если ваш кот хочет вас убить Что делать, если ваш кот хочет вас убить')  # Превышение длины
         assert len(collector.books_genre) == 0
 
-   # def test_set_book_genre_set_:
+    @pytest.mark.parametrize('name,genre',
+                             [
+                                 ['Оно', 'Ужасы'],
+                                 ['Ревизор', 'Комедии']
+                             ]
+                             )
+    def test_set_book_genre_set_genre_book_has_a_genre(self, name, genre):      # 2 Проверка на добавление жанра
+        collector = BooksCollector()
+        collector.add_new_book(name)
+        collector.set_book_genre(name, genre)
+        assert collector.books_genre[name] == genre
 
 
 
 
-    # чтобы тесты были независимыми в каждом из них создавай отдельный экземпляр класса BooksCollector()
+
+
+
+
