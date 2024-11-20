@@ -35,13 +35,35 @@ class TestBooksCollector:
                                  ['Ревизор', 'Комедии']
                              ]
                              )
-    def test_set_book_genre_set_genre_book_has_a_genre(self, name, genre):      # 2 Проверка на добавление жанра
+    def test_set_book_genre_set_genre_book_has_a_genre(self, name, genre):      # 2 Проверка на добавление жанра у книги
         collector = BooksCollector()
         collector.add_new_book(name)
         collector.set_book_genre(name, genre)
         assert collector.books_genre[name] == genre
 
+    @pytest.mark.parametrize('name,genre',
+                             [
+                                 ['Оно', 'Ужастик'],
+                                 ['Ревизор', 'Комедия']
+                             ]
+                             )
+    def test_set_book_genre_set_of_unknown_genre_book_has_no_genre(self, name, genre):      # 3 Проверка на попытку ввода неизвестного жанра
+        collector = BooksCollector()
+        collector.add_new_book(name)
+        collector.set_book_genre(name, genre)
+        assert collector.books_genre[name] == ''
 
+    @pytest.mark.parametrize('name,genre',
+                             [
+                                 ['Оно', 'Ужасы'],
+                                 ['Ревизор', 'Комедии']
+                             ]
+                             )
+    def test_get_book_genre_ask_genre_get_the_genre(self, name, genre):  # 4 Проверка на получение жанра книги по названию
+        collector = BooksCollector()
+        collector.add_new_book(name)
+        collector.set_book_genre(name, genre)
+        assert collector.get_book_genre(name) == genre
 
 
 
