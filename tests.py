@@ -99,6 +99,23 @@ class TestBooksCollector:
         collector.add_book_in_favorites('Оно')
         assert collector.get_list_of_favorites_books() == ['Оно']
 
+    def test_delete_book_from_favorites_add_and_delete_book_list_empty(self):    # 11 Проверка на удаление книги из избранного
+        collector = BooksCollector()
+        collector.add_new_book('Оно')
+        collector.add_book_in_favorites('Оно')
+        collector.delete_book_from_favorites('Оно')
+        assert collector.get_list_of_favorites_books() == []
+
+    def test_get_list_of_favorites_books_add_two_books_one_in_favorities(self):    # 12 Проверка получения списка избранных книг
+        collector = BooksCollector()
+        collector.add_new_book('Оно')
+        collector.add_new_book('Гарри Поттер')
+        collector.add_book_in_favorites('Оно')
+        assert collector.get_list_of_favorites_books() == ['Оно']
+
+
+
+
 
 
 
